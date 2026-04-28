@@ -28,6 +28,7 @@ class PessoaDialog extends StatelessWidget {
               //style:
                  // ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                 
               onPressed: () async{
                 //onDeletePessoa(pessoa); //Aula da lista. Para deletar uma lista. Somente essa linha.
                 await pessoaController.removerPessoa(pessoa); //Injeção de dependencia. Substitui o codigo de cima.
@@ -43,7 +44,8 @@ class PessoaDialog extends StatelessWidget {
               ),
             ),
                ElevatedButton(//Http put
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              // style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () async {
                 Navigator.of(context).pushNamed(
                   Routes.criarPessoaPage,
@@ -81,7 +83,11 @@ class PessoaDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Informações do usuário"),
+            // Text("Informações do usuário"),
+             Text(
+              "Informações do usuário",
+              style: TextStyle(color: Colors.black),
+            ),
             SizedBox(height: 8),
             DefaultDialogContainer(//Provem do default_dialog_container.dart
               child: Text("Id: ${pessoa.id}"),

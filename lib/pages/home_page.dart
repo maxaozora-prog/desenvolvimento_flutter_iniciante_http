@@ -123,8 +123,13 @@ class _HomePageState extends State<HomePage> {
               child: CircularProgressIndicator(),
             );
           }
-          return ListaPessoas(
-            pessoas: pessoaController.pessoas,
+          // return ListaPessoas(
+          //   pessoas: pessoaController.pessoas,
+          return Padding(//Melhoria
+            padding: const EdgeInsets.all(8.0),
+            child: ListaPessoas(
+              pessoas: pessoaController.pessoas,
+            ),
           );
         },
       //body: ListaPessoas( //Aula da lista. Para cadastrar uma lista.
@@ -177,6 +182,7 @@ class _HomePageState extends State<HomePage> {
         //   // );
         // },
         child: Icon(Icons.navigate_next),
+        
       ),
     );
   }

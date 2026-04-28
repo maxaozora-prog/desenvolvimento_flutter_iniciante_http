@@ -27,7 +27,8 @@ class CustomPersonTile extends StatelessWidget {
           },
         );
       },
-      color: Colors.lightBlue,
+      // color: Colors.lightBlue,
+      color: Theme.of(context).primaryColor,
       leading: Text("Id: ${pessoa.id}"),
       title: Text(
         pessoa.nome,

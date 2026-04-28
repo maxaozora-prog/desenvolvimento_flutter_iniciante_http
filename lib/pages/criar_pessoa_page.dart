@@ -40,7 +40,8 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nova página"),
+        // title: Text("Nova página"),
+        title: Text("Formulário"),//melhoria
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -146,7 +147,8 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
                              await pessoaController
                                 .atualizarPessoa(pessoaAtualizada);
                         }
-                         Navigator.of(context).pop();
+                        //  Navigator.of(context).pop();
+                          if (context.mounted) Navigator.of(context).pop();
                       }
                       },
                       child: Text("Salvar"),
