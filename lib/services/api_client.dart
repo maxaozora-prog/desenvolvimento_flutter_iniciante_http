@@ -4,11 +4,15 @@ import 'package:desenvolvimento_flutter_iniciante/models/pessoa.dart';
 import 'package:dio/dio.dart';
 
 class ApiClient {
-  final Dio dio = Dio();
+  // final Dio dio = Dio();
+  final Dio dio;//Foi introduzido na aula de ajuste de injeção de dependencia.
+  final String apiUrl;//Foi introduzido na aula de ajuste de injeção de dependencia.
+
+  ApiClient({required this.dio, required this.apiUrl});
 
   Future<List<Pessoa>> get() async {
-    final request = await dio.get("http://localhost:3000/pessoas"); // não funciona o localhost, tem que ser o ip da maquina mais a rota da api.
-
+    // final request = await dio.get("http://localhost:3000/pessoas"); // não funciona o localhost, tem que ser o ip da maquina mais a rota da api.
+    final request = await dio.get("$apiUrl/pessoas");//Foi introduzido na aula de ajuste de injeção de dependecia.
     if (request.statusCode == 200) {
       final data = request.data;
 
@@ -34,7 +38,8 @@ class ApiClient {
 
   Future<Pessoa> post(CriarPessoaDto criarPessoa) async {
     final request = await dio.post(
-      "http://localhost:3000/pessoas",
+      // "http://localhost:3000/pessoas",
+      "$apiUrl/pessoas",
       data: criarPessoa.toJson(), //Criar pessoa é um objeto de CriarPessoaDto do criar_pessoa_dto.dart.
     );
 
@@ -47,7 +52,9 @@ class ApiClient {
 
 
   Future<void> delete(Pessoa pessoa) async{
-  final request= await dio.delete("http://localhost:3000/pessoas/${pessoa.id}");
+  // final request= await dio.delete("http://localhost:3000/pessoas/${pessoa.id}");
+  final request= await dio.delete("$apiUrl/pessoas/${pessoa.id}",
+    );
   if (request.statusCode !=200) {
     throw Exception("Status code inválido");
 
@@ -56,7 +63,8 @@ class ApiClient {
 
  Future<Pessoa> put(Pessoa pessoa) async {
     final request = await dio.put(
-      "http://localhost:3000/pessoas/${pessoa.id}",
+      // "http://localhost:3000/pessoas/${pessoa.id}",
+      "$apiUrl/pessoas/${pessoa.id}",
       data: pessoa.toJson(),
     );
     if (request.statusCode == 200) {

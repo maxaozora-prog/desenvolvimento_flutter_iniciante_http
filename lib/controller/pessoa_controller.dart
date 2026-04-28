@@ -10,7 +10,9 @@ class PessoaController extends ChangeNotifier{ //ChangeNotifier para injeção d
  // ValueNotifier<String> mensagemNotifier = ValueNotifier("");
   ValueNotifier<MessagesStates> mensagemNotifier =ValueNotifier(IddleMessage()); //substitui o codigo de cima.
 
-final apiClient = ApiClient();//Requisição http
+// final apiClient = ApiClient();//Requisição http
+final ApiClient apiClient;// Ajustando injeção de dependencia.
+PessoaController({required this.apiClient});// Ajustando injeção de dependencia.
 
 //Requisição http para listar pessoas.
 bool _loading = false;
@@ -24,6 +26,8 @@ bool _loading = false;
       _pessoas = pessoas;
     } on Exception catch (error) {
       //TODO: tratamento da excessão
+      mensagemNotifier.value =//Foi introduzido na aula de ajuste de injeção de dependencia
+          ErrorMessage(message: "ocorreu um erro ao buscar pessoas.");
       print("error: $error");
     } finally {
       _loading = false;
@@ -58,7 +62,8 @@ bool _loading = false;
       mensagemNotifier.value =
           SuccessMessage(message: "Pessoa adicionada com sucesso.");
       notifyListeners();
-    } on Exception catch (error) {
+    // } on Exception catch (error) {
+     } on Exception catch (_) {//Foi adeirido na aula de ajuste de injeção de dependencia. error foi substituido porquenão está em uso.
       mensagemNotifier.value =
           ErrorMessage(message: "Ocorreu um erro ao adicionar pessoa");
     }
@@ -77,7 +82,8 @@ bool _loading = false;
       _pessoas.remove(pessoa);
       mensagemNotifier.value =
           SuccessMessage(message: "Pessoa removida com sucesso.");
-    } on Exception catch (error) {
+    // } on Exception catch (error) {
+       } on Exception catch (_) {//Foi adeirido na aula de ajuste de injeção de dependencia. error foi substituido porquenão está em uso.
     } finally {
       notifyListeners();
     }
@@ -93,7 +99,8 @@ bool _loading = false;
 
       mensagemNotifier.value =
           SuccessMessage(message: "Pessoa atualizada com sucesso.");
-    } on Exception catch (error) {
+    // } on Exception catch (error) {
+       } on Exception catch (_) {//Foi adeirido na aula de ajuste de injeção de dependencia. error foi substituido porquenão está em uso.
       mensagemNotifier.value =
           ErrorMessage(message: "Ocorreu um erro ao atualizar pessoa");
     } finally {
