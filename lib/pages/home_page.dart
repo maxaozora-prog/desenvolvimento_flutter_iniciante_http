@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
     // );
         final value = themeController.mensagemNotifier.value;
     if (value is SuccessMessage) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.green,
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                 themeController.toggleTheme(value);
               },
             ),
-            Text("Tema escuro")
+            Text(themeController.darkTheme == false ? "Tema Claro" : "Tema Escuro"),
           ],
         ),
       ),
